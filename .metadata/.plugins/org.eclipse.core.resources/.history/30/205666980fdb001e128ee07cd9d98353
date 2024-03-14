@@ -1,0 +1,132 @@
+package MMMD.Test_Cases.End2endProcess;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import MMMD.Application_Forms;
+import MMMD.Eligibilities_Validation;
+import MMMD.Global_Variables;
+import MMMD.Inspection_Steps;
+import MMMD.Service_Description;
+import MMMD.ZamPass_;
+import MMMD.ZamPay;
+
+
+public class End2End_PositveFlow_Mining_Licence_Small extends Global_Variables {
+
+	
+/*	//@RepeatedTest(5)
+	@Test
+	public void miningLicene_Small() throws InterruptedException {
+
+		// login in EFilling
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://mmmdui.dotgov.cloud/services");
+		driver.manage().window().maximize();
+		ZamPass loginEF = new ZamPass(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+
+		// Individual:
+		ApplicationForm serviceForms = new ApplicationForm(driver);
+		serviceForms.caseDetailsForm(Category[0], Customer[0], CustomerID[0]);
+		serviceForms.applicationFormSmallNon_And_Radioactive(Category[0]);
+		EligibilityValidation serviceEligibility = new EligibilityValidation(driver);
+		serviceEligibility.eligibilityVerification(Category[0], Customer[0], ScaleOfOperation[2], MineralsType[2]);
+
+		/* 	public static final String[] ScaleOfOperation = new String[] {
+			"Artisanal (not exceeding 9.98 ha)",
+			"Large Scale (399.7 - 24,925.05 ha)",
+			"Small Scale (9.99 - 399.6 ha)"};
+	
+	public static final String[] MineralsType = new String[] {
+			"Non-Radioactive",
+			"Radioactive",
+			"Radioactive and Non-Radioactive"};	
+		serviceForms.goToNextGS_1();
+
+		ZamPay payment = new ZamPay(driver);
+
+		payment.paymentWithMTN(phoneNumbers[0]);
+
+		// Inspection process
+		driver.get("https://mmmd.dotgov.cloud/");
+		ZamPass loginIntranet = new ZamPass(driver);
+		loginIntranet.loginInIntranet(Username, Password, User);
+
+		Inspection_Process b = new Inspection_Process(driver);
+
+		// String no = "MMMD-0003104/2-2024";
+		b.caseOfficer_step1(caseNumber);
+		b.caseOfficer_step2(caseNumber);
+		b.supervisor_step3(caseNumber);
+		b.committee_step4(caseNumber);
+		b.executive_step5(caseNumber);
+	}
+	*/	
+		public void x() throws InterruptedException  {
+			
+			WebDriver driver = new ChromeDriver();
+			driver.get("https://mmmdui.dotgov.cloud/services");
+			driver.manage().window().maximize();
+			ZamPass_ loginEF = new ZamPass_(driver);
+			loginEF.loginInEF(Username, Password, User);
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.extraPaymentEF();
+		ZamPay payment = new ZamPay(driver);
+		payment.paymentWithMTN(phoneNumbers[0]);
+		
+
+	}
+	
+	
+/*	
+	@Test
+	public void explorationLicence_Large() throws InterruptedException {
+
+		// login in EFilling
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://mmmdui.dotgov.cloud/services");
+		driver.manage().window().maximize();
+		ZamPass loginEF = new ZamPass(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+		// sd.serviceDescriptionValidation(ServiceText, FeeText, ProcessingTimeText,
+		// ValidityText);
+
+		// Individual:
+		ApplicationForm serviceForms = new ApplicationForm(driver);
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+		
+		serviceForms.applicationFormLargeRadioactive(Category[1]);
+
+		EligibilityValidation serviceEligibility = new EligibilityValidation(driver);
+		serviceEligibility.eligibilityVerification(Category[1], Customer[0], null, null);
+
+		serviceForms.goToNextGS_1();
+
+		ZamPay payment = new ZamPay(driver);
+
+		payment.paymentWithMTN(phoneNumbers[0]);
+
+		// Inspection process
+		driver.get("https://mmmd.dotgov.cloud/");
+		// login in Intranet
+		ZamPass loginIntranet = new ZamPass(driver);
+		loginIntranet.loginInIntranet(Username, Password, User);
+
+		Inspection_Process b = new Inspection_Process(driver);
+
+		// String no = "MMMD-0003104/2-2024";
+		b.caseOfficer_step1(caseNumber);
+		b.caseOfficer_step2(caseNumber);
+		b.supervisor_step3(caseNumber);
+		b.committee_step4(caseNumber);
+		b.executive_step5(caseNumber);
+
+	}
+*/
+}

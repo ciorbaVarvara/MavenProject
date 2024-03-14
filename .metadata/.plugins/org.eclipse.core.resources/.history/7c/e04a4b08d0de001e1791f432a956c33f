@@ -1,0 +1,34 @@
+package learning;
+
+import java.util.ArrayList;
+
+import org.testng.annotations.Test;
+
+public class test {
+
+	@Test
+	public void arrayList () {
+		
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("Abffff");
+		list.add("Afdssdf");
+		list.add("dsdfgdgf");
+		list.add("gggg");
+		
+		int count = 0;
+		
+		for ( int i=0; i<=list.size(); i++) {
+			
+			list.get(i).startsWith("A");
+			count ++;
+			
+		}
+		System.out.println(count);
+		
+		
+		
+	}
+	
+	
+	
+}

@@ -1,0 +1,1123 @@
+package MMMD;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class Application_Forms extends AbstractComponents {
+
+	public Application_Forms(WebDriver driver) {
+		super(driver);
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+
+	// Case Details
+	@FindBy(xpath = "//p[contains(text(),\"Start Application\")]")
+	WebElement startApplicationBtn;
+	@FindBy(xpath = "//h3[contains(text(),\"Case Details\")]")
+	WebElement caseDetailsH;
+	@FindBy(xpath = "(//input[@role=\"combobox\"])[4]")
+	WebElement category;
+	@FindBy(xpath = "(//input[@role=\"combobox\"])[6]")
+	WebElement customer;
+	@FindBy(xpath = "(//span[@class=\"e-input-group-icon e-ddl-icon e-search-icon\"])[6]")
+	WebElement openCustomerList;
+	@FindBy(xpath = "//*[contains(text(),\"Organization\")]")
+	WebElement selectOrganization;
+	@FindBy(xpath = "//*[contains(text(),\"Individual\")]")
+	WebElement selectIndividual;
+	@FindBy(xpath = "(//input[@role=\"textbox\"])[1]")
+	WebElement customerID_Ind;
+	@FindBy(xpath = "(//button[contains(text(),\"Query\")])[1]")
+	WebElement queryBtn_Ind;
+	@FindBy(xpath = "(//input[@role=\"textbox\"])[4]")
+	WebElement customerID_Org;
+	@FindBy(xpath = "(//button[contains(text(),\"Query\")])[2]")
+	WebElement queryBtn_Org;
+	@FindBy(xpath = "(//input[@role=\"textbox\"])[2]")
+	WebElement customerFirstName;
+	@FindBy(xpath = "(//input[@role=\"textbox\"])[3]")
+	WebElement customerLastName;
+	@FindBy(xpath = "//button[contains(text(),\" Next \")]")
+	WebElement nextBtn;
+	@FindBy(xpath = "//h3[contains(text(),\"Applicant Details\")]")
+	WebElement applicantDetailsH;
+	@FindBy(xpath = "//h3[contains(text(),\"Representative Details\")]")
+	WebElement representativeH;
+	@FindBy(xpath = "//h3[contains(text(),\"Service Application Form\")]")
+	WebElement serviceAppFormH;
+
+	// application fields
+	@FindBy(xpath = "(//span[@class=\"e-input-group-icon e-ddl-icon e-search-icon\"])[1]")
+	WebElement spin_1;
+	@FindBy(xpath = "(//span[@class=\"e-input-group-icon e-ddl-icon e-search-icon\"])[2]")
+	WebElement spin_2;
+
+	@FindBy(xpath = "(//input[@role=\"spinbutton\"])[1]")
+	WebElement period;
+
+	@FindBy(xpath = "(//input[@role=\"combobox\"])[1]")
+	WebElement scaleOfOperation;
+
+	@FindBy(xpath = "label[contains(text(),\" Minerals Type\")]")
+	WebElement MineralsTypeH;
+	////
+	@FindBy(xpath = "(//input[@role=\"combobox\"])[2]")
+	WebElement mineralsType;
+
+	// minerals table
+	@FindBy(xpath = "//h5[contains(text(),\" Minerals \")]")
+	WebElement mineralsH_0;
+	@FindBy(xpath = "(//button)[3]") WebElement addMineralsBtn;
+	@FindBy(xpath = "//h4[contains(text(),\" Minerals \")]")
+	WebElement mineralsH;
+	@FindBy(xpath = "(//input[@role=\"combobox\"])[10]")
+	WebElement mineral;
+	@FindBy(xpath = "(//span[@class=\"e-input-group-icon e-ddl-icon e-search-icon\"])[10]")
+	WebElement openListBtn;
+	@FindBy(xpath = "//*[contains(text(),\"Andalucite\")]")
+	WebElement selectMineral;
+	@FindBy(xpath = "(//button[contains(text(),\"Save\")])[2]")
+	WebElement saveMineralsBtn;
+
+	// coordinates table
+	@FindBy(xpath = "(//button[@class=\"btn btn-outline-primary btn-sm d-flex align-items-center me-2\"])[2]")
+	WebElement addCoordinatesBtn;
+	@FindBy(xpath = "//h4[contains(text(),\" Coordinates \")]")
+	WebElement coordinatesH;
+	@FindBy(xpath = "(//input[@role=\"spinbutton\"])[3]")
+	WebElement c1;
+	@FindBy(xpath = "(//input[@role=\"spinbutton\"])[4]")
+	WebElement c2;
+	@FindBy(xpath = "(//input[@role=\"spinbutton\"])[5]")
+	WebElement c3;
+	@FindBy(xpath = "(//input[@role=\"spinbutton\"])[6]")
+	WebElement c4;
+	@FindBy(xpath = "(//input[@role=\"spinbutton\"])[7]")
+	WebElement c5;
+	@FindBy(xpath = "(//input[@role=\"spinbutton\"])[8]")
+	WebElement c6;
+	@FindBy(xpath = "(//button[contains(text(),\"Save\")])[3]")
+	WebElement saveCoordinatesBtn;
+
+	// address
+	@FindBy(xpath = "(//input[@role=\"combobox\"])[3]")
+	WebElement province;
+	@FindBy(xpath = "(//input[@role=\"spinbutton\"])[2]")
+	WebElement size;
+	@FindBy(xpath = "(//input[@role=\"combobox\"])[4]")
+	WebElement district;
+
+	// additional details
+	@FindBy(xpath = "(//input[@role=\"textbox\"])[2]")
+	WebElement tpin;
+	@FindBy(xpath = "(//input[@role=\"textbox\"])[3]")
+	WebElement land;
+	@FindBy(xpath = "(//input[@role=\"textbox\"])[4]")
+	WebElement envImpactNo;
+
+	// eligibility
+	@FindBy(xpath = "//h3[contains(text(),\"Eligibility\")]")
+	WebElement eligibilityH;
+
+	// preview and sing gs-1
+	@FindBy(xpath = "//h3[contains(text(),\"Preview and Sign\")]")
+	WebElement gs1H;
+
+	// invoice
+	@FindBy(xpath = "//h3[contains(text(),\"Invoice\")]")
+	WebElement invoiceH;
+	@FindBy(xpath = "//button[contains(text(),\"Pay\")]")
+	WebElement payBtn;
+
+	// Scale of Operations + Minerals Type
+	@FindBy(xpath = "//*[contains(text(), \"Large Scale (399.7 - 24,925.05 ha)\")]")
+	WebElement selectLarge;
+	@FindBy(xpath = "//*[contains(text(), \"Small Scale (9.99 - 399.6 ha)\")]")
+	WebElement selectSmall;
+	@FindBy(xpath = "//*[contains(text(), \"Artisanal\")]")
+	WebElement selectArtisanal;
+
+	@FindBy(xpath = "//*[contains(text(),\" Non-Radioactive \")]")
+	WebElement selectNon_radioactive;
+
+	@FindBy(xpath = "//*[contains(text(),\" Radioactive \")]")
+	WebElement selectRadioactive;
+
+	@FindBy(xpath = "//*[contains(text(),\" Radioactive and Non-Radioactive \")]")
+	WebElement selectNon_and_Radioactive;
+
+	@FindBy(xpath = "(//span[@role=\"presentation\"])[12]")
+	WebElement caseNumberSpan;
+
+	// extra payment
+	@FindBy(xpath = "(//ul[@class=\"navbar-nav\"])[2]")
+	List<WebElement> secondNavbarEF;
+	@FindBy(xpath = "//a[text()=\" My Workplace \"]")
+	WebElement myWorkplaceBtn;
+	@FindBy(xpath = "//div[@class=\"col-md-12 col-sm-12 py-2 px-0\"]")
+	List<WebElement> leftBar;
+	@FindBy(xpath = "(//li[@class=\"e-list-item e-level-2\"])[5]")
+	WebElement pendingPaymentBtn;
+	@FindBy(xpath = "(//i[@class=\"custom-fs-3 icon-dge-service\"])[1]")
+	WebElement openInvoiceBtn;
+	@FindBy(xpath = "(//tr[@role=\"row\"])[1]")
+	List<WebElement> firstRow;
+
+	public void extraPaymentEF() throws InterruptedException {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		waitForPresenceOfAllElements(secondNavbarEF);
+		for (WebElement ele : secondNavbarEF) {
+			System.out.print(ele.getText());
+		}
+
+		waitForElementToBeClickable(myWorkplaceBtn);
+		myWorkplaceBtn.click();
+
+		waitForPresenceOfAllElements(leftBar);
+		for (WebElement ele : leftBar) {
+			System.out.print(ele.getText());
+		}
+
+		waitForElementToBeClickable(pendingPaymentBtn);
+		Thread.sleep(3000);
+		pendingPaymentBtn.click();
+		js.executeScript("arguments[0].click();", pendingPaymentBtn);
+
+		waitForElementToBeClickable(openInvoiceBtn);
+		openInvoiceBtn.click();
+
+		waitForPresenceOfAllElements(firstRow);
+
+		waitForElementToBeClickable(openInvoiceBtn);
+		openInvoiceBtn.click();
+
+		wait(invoiceH);
+		wait(payBtn);
+		js.executeScript("arguments[0].click();", payBtn);
+
+	}
+
+	// Case Details Form + Individual Form
+	public void caseDetailsForm(String serviceCategory, String customerType, String customerId) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		wait(startApplicationBtn);
+		startApplicationBtn.click();
+
+		// fill in Case Details Form
+		wait(caseDetailsH);
+		if (caseDetailsH.isDisplayed()) {
+			System.out.println("Case Details Form is displayed");
+			wait(category);
+			category.sendKeys(serviceCategory);
+			category.sendKeys(Keys.ENTER);
+
+			if (customerType == "Individual") {
+				// choose customer type:
+				wait(customer);
+				customer.clear();
+				wait(openCustomerList);
+				openCustomerList.click();
+				wait(selectIndividual);
+				selectIndividual.click();
+				wait(customerID_Ind);
+				customerID_Ind.sendKeys(customerId);
+				wait(queryBtn_Ind);
+				queryBtn_Ind.click();
+				wait(nextBtn);
+				js.executeScript("arguments[0].click();", nextBtn);
+
+				wait(applicantDetailsH);
+
+				System.out.println("Applicant Details Form is displayed");
+				wait(nextBtn);
+				js.executeScript("arguments[0].click();", nextBtn);
+			}
+
+			else {
+				wait(customer);
+				customer.clear();
+				wait(openCustomerList);
+				openCustomerList.click();
+				wait(selectOrganization);
+				selectOrganization.click();
+				wait(customerID_Org);
+				customerID_Org.sendKeys(customerId);
+				wait(queryBtn_Org);
+				queryBtn_Org.click();
+				wait(nextBtn);
+				js.executeScript("arguments[0].click();", nextBtn);
+
+				wait(applicantDetailsH);
+				System.out.println("Applicant Details Form is displayed");
+				wait(nextBtn);
+				js.executeScript("arguments[0].click();", nextBtn);
+
+				wait(representativeH);
+				System.out.println("Representative Details Form is displayed");
+				wait(nextBtn);
+				js.executeScript("arguments[0].click();", nextBtn);
+			}
+		}
+	}
+
+	// Service Application Form
+	public void applicationFormLargeRadioactive(String serviceCategory) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(serviceAppFormH);
+		if (serviceAppFormH.isDisplayed()) {
+			System.out.println("Service Application Form is displayed");
+		}
+
+		wait(spin_1);
+		spin_1.click();
+		wait(selectLarge);// open list
+		selectLarge.click();
+
+		wait(mineralsType);
+		mineralsType.sendKeys("Radioactive");
+
+		wait(selectRadioactive);
+		selectRadioactive.click();
+
+		// fill in minerals table
+		wait(mineralsH_0);
+		wait(addMineralsBtn);
+		// addMineralsBtn.click();
+		js.executeScript("arguments[0].click();", addMineralsBtn);
+		wait(mineralsH);
+		wait(mineral);
+		wait(openListBtn);
+		openListBtn.click();
+		wait(selectMineral);
+		selectMineral.click();
+		wait(saveMineralsBtn);
+		saveMineralsBtn.click();
+
+		// Details Of Area Applied For Section
+		wait(province);
+		province.sendKeys("EASTERN PROVINCE");
+		wait(district);
+		district.sendKeys("KATETE");
+		wait(size);
+		size.sendKeys("100.23");
+
+		// fill in coordinates table
+		wait(addCoordinatesBtn);
+		wait(addCoordinatesBtn);
+		js.executeScript("arguments[0].click();", addCoordinatesBtn);
+		wait(coordinatesH);
+		wait(c1);
+		c1.sendKeys("1");
+		wait(c2);
+		c2.sendKeys("1");
+		wait(c3);
+		c3.sendKeys("1");
+		wait(c4);
+		c4.sendKeys("1");
+		wait(c5);
+		c5.sendKeys("1");
+		wait(c6);
+		c6.sendKeys("1");
+		wait(saveCoordinatesBtn);
+		js.executeScript("arguments[0].click();", saveCoordinatesBtn);
+
+		// Additional details Section
+		wait(tpin);
+		tpin.sendKeys("1234567895");
+		wait(land);
+		land.sendKeys("Land/200");
+
+		if (serviceCategory == "Mining Licence") {
+			wait(envImpactNo);
+			envImpactNo.sendKeys("134324");
+		}
+
+		wait(nextBtn);
+		js.executeScript("arguments[0].click();", nextBtn);
+
+	}
+
+	public void applicationFormLargeNonRadioactive(String serviceCategory) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(serviceAppFormH);
+		if (serviceAppFormH.isDisplayed()) {
+			System.out.println("Service Application Form is displayed");
+		}
+
+		wait(spin_1);
+		spin_1.click();
+		wait(selectLarge);// open list
+		selectLarge.click();
+
+		wait(mineralsType);
+		mineralsType.sendKeys("Non-Radioactive");
+
+		wait(selectNon_radioactive);
+		selectNon_radioactive.click();
+
+		// Required Information Section
+
+		// fill in minerals table
+		wait(mineralsH_0);
+
+		wait(addMineralsBtn);
+		// addMineralsBtn.click();
+		js.executeScript("arguments[0].click();", addMineralsBtn);
+		wait(mineralsH);
+		wait(mineral);
+		wait(openListBtn);
+		openListBtn.click();
+		wait(selectMineral);
+		selectMineral.click();
+		wait(saveMineralsBtn);
+		saveMineralsBtn.click();
+
+		// Details Of Area Applied For Section
+		wait(province);
+		province.sendKeys("EASTERN PROVINCE");
+		wait(district);
+		district.sendKeys("KATETE");
+		wait(size);
+		size.sendKeys("100.23");
+
+		// fill in coordinates table
+		wait(addCoordinatesBtn);
+		wait(addCoordinatesBtn);
+		js.executeScript("arguments[0].click();", addCoordinatesBtn);
+		wait(coordinatesH);
+		wait(c1);
+		c1.sendKeys("1");
+		wait(c2);
+		c2.sendKeys("1");
+		wait(c3);
+		c3.sendKeys("1");
+		wait(c4);
+		c4.sendKeys("1");
+		wait(c5);
+		c5.sendKeys("1");
+		wait(c6);
+		c6.sendKeys("1");
+		wait(saveCoordinatesBtn);
+		js.executeScript("arguments[0].click();", saveCoordinatesBtn);
+
+		// Additional details Section
+		wait(tpin);
+		tpin.sendKeys("1234567895");
+		wait(land);
+		land.sendKeys("Land/200");
+
+		if (serviceCategory == "Mining Licence") {
+			wait(envImpactNo);
+			envImpactNo.sendKeys("134324");
+		}
+
+		wait(nextBtn);
+		js.executeScript("arguments[0].click();", nextBtn);
+
+	}
+
+	public void applicationFormLargeNon_And_Radioactive(String serviceCategory) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(serviceAppFormH);
+		if (serviceAppFormH.isDisplayed()) {
+			System.out.println("Service Application Form is displayed");
+		}
+
+		wait(spin_1);
+		spin_1.click();
+		wait(selectLarge);// open list
+		selectLarge.click();
+
+		wait(mineralsType);
+		mineralsType.sendKeys("Radioactive and Non-Radioactive");
+
+		wait(selectNon_and_Radioactive);
+		selectNon_and_Radioactive.click();
+
+		// Required Information Section
+
+		// fill in minerals table
+		wait(mineralsH_0);
+
+		wait(addMineralsBtn);
+		// addMineralsBtn.click();
+		js.executeScript("arguments[0].click();", addMineralsBtn);
+		wait(mineralsH);
+		wait(mineral);
+		wait(openListBtn);
+		openListBtn.click();
+		wait(selectMineral);
+		selectMineral.click();
+		wait(saveMineralsBtn);
+		saveMineralsBtn.click();
+
+		// Details Of Area Applied For Section
+		wait(province);
+		province.sendKeys("EASTERN PROVINCE");
+		wait(district);
+		district.sendKeys("KATETE");
+		wait(size);
+		size.sendKeys("100.23");
+
+		// fill in coordinates table
+		wait(addCoordinatesBtn);
+		wait(addCoordinatesBtn);
+		js.executeScript("arguments[0].click();", addCoordinatesBtn);
+		wait(coordinatesH);
+		wait(c1);
+		c1.sendKeys("1");
+		wait(c2);
+		c2.sendKeys("1");
+		wait(c3);
+		c3.sendKeys("1");
+		wait(c4);
+		c4.sendKeys("1");
+		wait(c5);
+		c5.sendKeys("1");
+		wait(c6);
+		c6.sendKeys("1");
+		wait(saveCoordinatesBtn);
+		js.executeScript("arguments[0].click();", saveCoordinatesBtn);
+
+		// Additional details Section
+		wait(tpin);
+		tpin.sendKeys("1234567895");
+		wait(land);
+		land.sendKeys("Land/200");
+
+		if (serviceCategory == "Mining Licence") {
+			wait(envImpactNo);
+			envImpactNo.sendKeys("134324");
+		}
+
+		wait(nextBtn);
+		js.executeScript("arguments[0].click();", nextBtn);
+
+	}
+
+	public void applicationFormSmallNon_And_Radioactive(String serviceCategory) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(serviceAppFormH);
+		if (serviceAppFormH.isDisplayed()) {
+			System.out.println("Service Application Form is displayed");
+		}
+
+		wait(spin_1);
+		spin_1.click();
+		wait(selectSmall);// open list
+		selectSmall.click();
+
+		wait(mineralsType);
+		mineralsType.sendKeys("Radioactive and Non-Radioactive");
+
+		wait(selectNon_and_Radioactive);
+		selectNon_and_Radioactive.click();
+		// Required Information Section
+
+		// fill in minerals table
+		wait(mineralsH_0);
+
+		wait(addMineralsBtn);
+		// addMineralsBtn.click();
+		js.executeScript("arguments[0].click();", addMineralsBtn);
+		wait(mineralsH);
+		wait(mineral);
+		wait(openListBtn);
+		openListBtn.click();
+		wait(selectMineral);
+		selectMineral.click();
+		wait(saveMineralsBtn);
+		saveMineralsBtn.click();
+
+		// Details Of Area Applied For Section
+		wait(province);
+		province.sendKeys("EASTERN PROVINCE");
+		wait(district);
+		district.sendKeys("KATETE");
+		wait(size);
+		size.sendKeys("100.23");
+
+		// fill in coordinates table
+		wait(addCoordinatesBtn);
+		wait(addCoordinatesBtn);
+		js.executeScript("arguments[0].click();", addCoordinatesBtn);
+		wait(coordinatesH);
+		wait(c1);
+		c1.sendKeys("1");
+		wait(c2);
+		c2.sendKeys("1");
+		wait(c3);
+		c3.sendKeys("1");
+		wait(c4);
+		c4.sendKeys("1");
+		wait(c5);
+		c5.sendKeys("1");
+		wait(c6);
+		c6.sendKeys("1");
+		wait(saveCoordinatesBtn);
+		js.executeScript("arguments[0].click();", saveCoordinatesBtn);
+
+		// Additional details Section
+		wait(tpin);
+		tpin.sendKeys("1234567895");
+		wait(land);
+		land.sendKeys("Land/200");
+
+		if (serviceCategory == "Mining Licence") {
+			wait(envImpactNo);
+			envImpactNo.sendKeys("134324");
+		}
+
+		wait(nextBtn);
+		js.executeScript("arguments[0].click();", nextBtn);
+
+	}
+
+	public void applicationFormSmallRadioactive(String serviceCategory) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(serviceAppFormH);
+		if (serviceAppFormH.isDisplayed()) {
+			System.out.println("Service Application Form is displayed");
+		}
+
+		wait(spin_1);
+		spin_1.click();
+		wait(selectSmall);// open list
+		selectSmall.click();
+
+		wait(mineralsType);
+		mineralsType.sendKeys("Radioactive");
+
+		wait(selectRadioactive);
+		selectRadioactive.click();
+		// Required Information Section
+
+		// fill in minerals table
+		wait(mineralsH_0);
+
+		wait(addMineralsBtn);
+		// addMineralsBtn.click();
+		js.executeScript("arguments[0].click();", addMineralsBtn);
+		wait(mineralsH);
+		wait(mineral);
+		wait(openListBtn);
+		openListBtn.click();
+		wait(selectMineral);
+		selectMineral.click();
+		wait(saveMineralsBtn);
+		saveMineralsBtn.click();
+
+		// Details Of Area Applied For Section
+		wait(province);
+		province.sendKeys("EASTERN PROVINCE");
+		wait(district);
+		district.sendKeys("KATETE");
+		wait(size);
+		size.sendKeys("100.23");
+
+		// fill in coordinates table
+		wait(addCoordinatesBtn);
+		wait(addCoordinatesBtn);
+		js.executeScript("arguments[0].click();", addCoordinatesBtn);
+		wait(coordinatesH);
+		wait(c1);
+		c1.sendKeys("1");
+		wait(c2);
+		c2.sendKeys("1");
+		wait(c3);
+		c3.sendKeys("1");
+		wait(c4);
+		c4.sendKeys("1");
+		wait(c5);
+		c5.sendKeys("1");
+		wait(c6);
+		c6.sendKeys("1");
+		wait(saveCoordinatesBtn);
+		js.executeScript("arguments[0].click();", saveCoordinatesBtn);
+
+		// Additional details Section
+		wait(tpin);
+		tpin.sendKeys("1234567895");
+		wait(land);
+		land.sendKeys("Land/200");
+
+		if (serviceCategory == "Mining Licence") {
+			wait(envImpactNo);
+			envImpactNo.sendKeys("134324");
+		}
+
+		wait(nextBtn);
+		js.executeScript("arguments[0].click();", nextBtn);
+
+	}
+
+	public void applicationFormSmallNonRadioactive(String serviceCategory) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(serviceAppFormH);
+		if (serviceAppFormH.isDisplayed()) {
+			System.out.println("Service Application Form is displayed");
+		}
+
+		wait(spin_1);
+		spin_1.click();
+		wait(selectSmall);// open list
+		selectSmall.click();
+
+		wait(mineralsType);
+		mineralsType.sendKeys("Non-Radioactive");
+
+		wait(selectNon_radioactive);
+		selectNon_radioactive.click();
+		// Required Information Section
+
+		// fill in minerals table
+		wait(mineralsH_0);
+
+		wait(addMineralsBtn);
+		// addMineralsBtn.click();
+		js.executeScript("arguments[0].click();", addMineralsBtn);
+		wait(mineralsH);
+		wait(mineral);
+		wait(openListBtn);
+		openListBtn.click();
+		wait(selectMineral);
+		selectMineral.click();
+		wait(saveMineralsBtn);
+		saveMineralsBtn.click();
+
+		// Details Of Area Applied For Section
+		wait(province);
+		province.sendKeys("EASTERN PROVINCE");
+		wait(district);
+		district.sendKeys("KATETE");
+		wait(size);
+		size.sendKeys("100.23");
+
+		// fill in coordinates table
+		wait(addCoordinatesBtn);
+		wait(addCoordinatesBtn);
+		js.executeScript("arguments[0].click();", addCoordinatesBtn);
+		wait(coordinatesH);
+		wait(c1);
+		c1.sendKeys("1");
+		wait(c2);
+		c2.sendKeys("1");
+		wait(c3);
+		c3.sendKeys("1");
+		wait(c4);
+		c4.sendKeys("1");
+		wait(c5);
+		c5.sendKeys("1");
+		wait(c6);
+		c6.sendKeys("1");
+		wait(saveCoordinatesBtn);
+		js.executeScript("arguments[0].click();", saveCoordinatesBtn);
+
+		// Additional details Section
+		wait(tpin);
+		tpin.sendKeys("1234567895");
+		wait(land);
+		land.sendKeys("Land/200");
+
+		if (serviceCategory == "Mining Licence") {
+			wait(envImpactNo);
+			envImpactNo.sendKeys("134324");
+		}
+
+		wait(nextBtn);
+		js.executeScript("arguments[0].click();", nextBtn);
+
+	}
+
+	public void applicationFormArtisanalNonRadioactive(String serviceCategory) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(serviceAppFormH);
+		if (serviceAppFormH.isDisplayed()) {
+			System.out.println("Service Application Form is displayed");
+		}
+
+		wait(spin_1);
+		spin_1.click();
+		wait(selectArtisanal);// open list
+		selectArtisanal.click();
+
+		wait(mineralsType);
+		mineralsType.sendKeys("Non-Radioactive");
+
+		wait(selectNon_radioactive);
+		selectNon_radioactive.click();
+		// Required Information Section
+
+		// fill in minerals table
+		wait(mineralsH_0);
+
+		wait(addMineralsBtn);
+		// addMineralsBtn.click();
+		js.executeScript("arguments[0].click();", addMineralsBtn);
+		wait(mineralsH);
+		wait(mineral);
+		wait(openListBtn);
+		openListBtn.click();
+		wait(selectMineral);
+		selectMineral.click();
+		wait(saveMineralsBtn);
+		saveMineralsBtn.click();
+
+		// Details Of Area Applied For Section
+		wait(province);
+		province.sendKeys("EASTERN PROVINCE");
+		wait(district);
+		district.sendKeys("KATETE");
+		wait(size);
+		size.sendKeys("100.23");
+
+		// fill in coordinates table
+		wait(addCoordinatesBtn);
+		wait(addCoordinatesBtn);
+		js.executeScript("arguments[0].click();", addCoordinatesBtn);
+		wait(coordinatesH);
+		wait(c1);
+		c1.sendKeys("1");
+		wait(c2);
+		c2.sendKeys("1");
+		wait(c3);
+		c3.sendKeys("1");
+		wait(c4);
+		c4.sendKeys("1");
+		wait(c5);
+		c5.sendKeys("1");
+		wait(c6);
+		c6.sendKeys("1");
+		wait(saveCoordinatesBtn);
+		js.executeScript("arguments[0].click();", saveCoordinatesBtn);
+
+		// Additional details Section
+		wait(tpin);
+		tpin.sendKeys("1234567895");
+		wait(land);
+		land.sendKeys("Land/200");
+
+		if (serviceCategory == "Mining Licence") {
+			wait(envImpactNo);
+			envImpactNo.sendKeys("134324");
+		}
+
+		wait(nextBtn);
+		js.executeScript("arguments[0].click();", nextBtn);
+
+	}
+
+	public void applicationFormArtisanalRadioactive(String serviceCategory) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(serviceAppFormH);
+		if (serviceAppFormH.isDisplayed()) {
+			System.out.println("Service Application Form is displayed");
+		}
+
+		wait(spin_1);
+		spin_1.click();
+		wait(selectArtisanal);// open list
+		selectArtisanal.click();
+
+		wait(mineralsType);
+		mineralsType.sendKeys("Radioactive");
+
+		wait(selectRadioactive);
+		selectRadioactive.click();
+		// Required Information Section
+
+		// fill in minerals table
+		wait(mineralsH_0);
+
+		wait(addMineralsBtn);
+		// addMineralsBtn.click();
+		js.executeScript("arguments[0].click();", addMineralsBtn);
+		wait(mineralsH);
+		wait(mineral);
+		wait(openListBtn);
+		openListBtn.click();
+		wait(selectMineral);
+		selectMineral.click();
+		wait(saveMineralsBtn);
+		saveMineralsBtn.click();
+
+		// Details Of Area Applied For Section
+		wait(province);
+		province.sendKeys("EASTERN PROVINCE");
+		wait(district);
+		district.sendKeys("KATETE");
+		wait(size);
+		size.sendKeys("100.23");
+
+		// fill in coordinates table
+		wait(addCoordinatesBtn);
+		wait(addCoordinatesBtn);
+		js.executeScript("arguments[0].click();", addCoordinatesBtn);
+		wait(coordinatesH);
+		wait(c1);
+		c1.sendKeys("1");
+		wait(c2);
+		c2.sendKeys("1");
+		wait(c3);
+		c3.sendKeys("1");
+		wait(c4);
+		c4.sendKeys("1");
+		wait(c5);
+		c5.sendKeys("1");
+		wait(c6);
+		c6.sendKeys("1");
+		wait(saveCoordinatesBtn);
+		js.executeScript("arguments[0].click();", saveCoordinatesBtn);
+
+		// Additional details Section
+		wait(tpin);
+		tpin.sendKeys("1234567895");
+		wait(land);
+		land.sendKeys("Land/200");
+
+		if (serviceCategory == "Mining Licence") {
+			wait(envImpactNo);
+			envImpactNo.sendKeys("134324");
+		}
+
+		wait(nextBtn);
+		js.executeScript("arguments[0].click();", nextBtn);
+
+	}
+
+	public void applicationFormArtisanalNon_And_Radioactive(String serviceCategory) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(serviceAppFormH);
+		if (serviceAppFormH.isDisplayed()) {
+			System.out.println("Service Application Form is displayed");
+		}
+
+		wait(spin_1);
+		spin_1.click();
+		wait(selectArtisanal);// open list
+		selectArtisanal.click();
+
+		wait(mineralsType);
+		mineralsType.sendKeys("Radioactive and Non-Radioactive");
+
+		wait(selectNon_and_Radioactive);
+		selectNon_and_Radioactive.click();
+		// Required Information Section
+
+		// fill in minerals table
+		wait(mineralsH_0);
+
+		wait(addMineralsBtn);
+		// addMineralsBtn.click();
+		js.executeScript("arguments[0].click();", addMineralsBtn);
+		wait(mineralsH);
+		wait(mineral);
+		wait(openListBtn);
+		openListBtn.click();
+		wait(selectMineral);
+		selectMineral.click();
+		wait(saveMineralsBtn);
+		saveMineralsBtn.click();
+
+		// Details Of Area Applied For Section
+		wait(province);
+		province.sendKeys("EASTERN PROVINCE");
+		wait(district);
+		district.sendKeys("KATETE");
+		wait(size);
+		size.sendKeys("100.23");
+
+		// fill in coordinates table
+		wait(addCoordinatesBtn);
+		wait(addCoordinatesBtn);
+		js.executeScript("arguments[0].click();", addCoordinatesBtn);
+		wait(coordinatesH);
+		wait(c1);
+		c1.sendKeys("1");
+		wait(c2);
+		c2.sendKeys("1");
+		wait(c3);
+		c3.sendKeys("1");
+		wait(c4);
+		c4.sendKeys("1");
+		wait(c5);
+		c5.sendKeys("1");
+		wait(c6);
+		c6.sendKeys("1");
+		wait(saveCoordinatesBtn);
+		js.executeScript("arguments[0].click();", saveCoordinatesBtn);
+
+		// Additional details Section
+		wait(tpin);
+		tpin.sendKeys("1234567895");
+		wait(land);
+		land.sendKeys("Land/200");
+
+		if (serviceCategory == "Mining Licence") {
+			wait(envImpactNo);
+			envImpactNo.sendKeys("134324");
+		}
+
+		wait(nextBtn);
+		js.executeScript("arguments[0].click();", nextBtn);
+
+	}
+
+	public void applicationFormMineralProcessing(String periodValue) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(serviceAppFormH);
+		if (serviceAppFormH.isDisplayed()) {
+			System.out.println("Service Application Form is displayed");
+		}
+
+		// Required Information Section
+		wait(period);
+		period.sendKeys(periodValue);
+
+		// fill in minerals table
+		wait(mineralsH_0);
+
+		wait(addMineralsBtn);
+		// addMineralsBtn.click();
+		js.executeScript("arguments[0].click();", addMineralsBtn);
+		wait(mineralsH);
+		wait(mineral);
+		wait(openListBtn);
+		openListBtn.click();
+		wait(selectMineral);
+		selectMineral.click();
+		wait(saveMineralsBtn);
+		saveMineralsBtn.click();
+
+		// Details Of Area Applied For Section
+		wait(province);
+		province.sendKeys("EASTERN PROVINCE");
+		wait(district);
+		district.sendKeys("KATETE");
+		wait(size);
+		size.sendKeys("100.23");
+
+		// fill in coordinates table
+		wait(addCoordinatesBtn);
+		wait(addCoordinatesBtn);
+		js.executeScript("arguments[0].click();", addCoordinatesBtn);
+		wait(coordinatesH);
+		wait(c1);
+		c1.sendKeys("1");
+		wait(c2);
+		c2.sendKeys("1");
+		wait(c3);
+		c3.sendKeys("1");
+		wait(c4);
+		c4.sendKeys("1");
+		wait(c5);
+		c5.sendKeys("1");
+		wait(c6);
+		c6.sendKeys("1");
+		wait(saveCoordinatesBtn);
+		js.executeScript("arguments[0].click();", saveCoordinatesBtn);
+
+		// Additional details Section
+		wait(tpin);
+		tpin.sendKeys("1234567895");
+		wait(land);
+		land.sendKeys("Land/200");
+
+		wait(nextBtn);
+		js.executeScript("arguments[0].click();", nextBtn);
+
+	}
+
+	public void goToNextGS_1() {
+
+		// eligibility
+		// driver.switchTo().window(tabs.get(1));
+		wait(nextBtn);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", nextBtn);
+
+		// preview and sign gs-1
+		wait(gs1H);
+		wait(caseNumberSpan);
+
+		caseNumber = caseNumberSpan.getText();
+
+		System.out.println(caseNumber);
+
+		wait(nextBtn);
+		js.executeScript("arguments[0].click();", nextBtn);
+
+		// invoice
+		wait(invoiceH);
+		wait(payBtn);
+		js.executeScript("arguments[0].click();", payBtn);
+
+		// get ZamPay window
+		ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(1));
+		// driver.close();
+		// String lastWindowHandle = new TreeSet<>(driver.getWindowHandles()).last();
+		// driver.switchTo().window(lastWindowHandle);
+
+		// System.out.println(driver.getCurrentUrl());
+		// System.out.println(driver.getTitle());
+
+	}
+
+	// eligibility
+	/*
+	 * waitForVisibilityOfElement(eligibilityH);
+	 * waitForElementToBeClickable(nextBtn);
+	 * js.executeScript("arguments[0].click();", nextBtn);
+	 * 
+	 * 
+	 * //preview and sign gs-1 waitForVisibilityOfElement(gs1H);
+	 * 
+	 * //preview and sign waitForVisibilityOfElement(gs1H);
+	 * waitForElementToBeClickable(nextBtn);
+	 * js.executeScript("arguments[0].click();", nextBtn);
+	 * 
+	 * //invoice waitForVisibilityOfElement(invoiceH);
+	 * waitForElementToBeClickable(payBtn);
+	 * js.executeScript("arguments[0].click();", payBtn);
+	 * 
+	 * //get ZamPay window ArrayList<String> tabs = new
+	 * ArrayList<>(driver.getWindowHandles());
+	 * driver.switchTo().window(tabs.get(1)); // String lastWindowHandle = new
+	 * TreeSet<>(driver.getWindowHandles()).last(); //
+	 * driver.switchTo().window(lastWindowHandle);
+	 * 
+	 * // System.out.println(driver.getCurrentUrl()); //
+	 * System.out.println(driver.getTitle());
+	 * 
+	 */
+
+}

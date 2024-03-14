@@ -1,0 +1,53 @@
+package MMMD.Test_Cases.InspectionProcess;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import MMMD.Application_Forms;
+import MMMD.Global_Variables;
+import MMMD.Inspection_Steps;
+import MMMD.Service_Description;
+import MMMD.ZamPass_;
+import MMMD.ZamPay_;
+
+public class Approval_Process extends Global_Variables {
+
+	public static void main(String[] args) throws InterruptedException {
+
+		WebDriver driver = new ChromeDriver();
+
+        //Application Process
+		driver.get("https://mmmdui.dotgov.cloud/services");
+		driver.manage().window().maximize();
+
+		// login in Intranet
+		ZamPass_ loginEF = new ZamPass_(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+		Service_Description MiningAndNonMiningRightsLicenceService = new Service_Description(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormLargeRadioactive(Category[1]);
+		// serviceForms.applicationFormLargeNonRadioactive ();
+		// serviceForms.applicationFormLargeNon_And_Radioactive();
+
+		serviceForms.goToNextGS_1();
+
+		ZamPay_ payment = new ZamPay_(driver);
+		payment.paymentWithMTN(phoneNumbers[0]);
+
+//Inspection process
+		driver.get("https://mmmd.dotgov.cloud/");
+		driver.manage().window().maximize();
+
+		// login in Intranet
+		ZamPass_ loginIntranet = new ZamPass_(driver);
+		loginIntranet.loginInIntranet(Username, Password, User);
+
+		Inspection_Steps b = new Inspection_Steps(driver);
+
+	}
+
+}

@@ -1,0 +1,77 @@
+package MMMD.Test_Cases.Eligibility;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import MMMD.ApplicationForm;
+import MMMD.EligibilityValidation;
+import MMMD.GlobalVariables;
+import MMMD.ServiceDescription;
+import MMMD.ZamPass;
+
+public class Organization_Exploration_Radioactive extends GlobalVariables {
+	
+	public static void main(String[] args) throws InterruptedException {
+
+		WebDriver driver = new ChromeDriver();		
+		driver.get("https://mmmdui.dotgov.cloud/services");
+		driver.manage().window().maximize();
+		
+		
+		//login in EFilling
+		ZamPass loginEF = new ZamPass(driver);
+		loginEF.loginInEF(Username, Password, User);
+		
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+		//sd.serviceDescriptionValidation(ServiceText, FeeText, ProcessingTimeText, ValidityText);
+		
+		//Individual:
+		ApplicationForm serviceForms = new ApplicationForm(driver);
+		serviceForms.caseDetailsForm(Category[1], Customer[1], CustomerID[1]); 
+		
+		serviceForms.applicationFormSmallRadioactive (Category[1]); 
+
+		EligibilityValidation serviceEligibility = new EligibilityValidation(driver);
+	    serviceEligibility.eligibilityVerification(Category[1], Customer[1], ScaleOfOperation[1], MineralsType[1]); 
+
+	    
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	//	ZamPay paymentProcess = new ZamPay(driver);
+	//	paymentProcess.payment(card_number, expiry_month, expiry_year, cvv, card_name);
+		
+		
+		
+		
+				
+			
+			 
+			  	   
+			   
+			   
+		}
+
+	}
+

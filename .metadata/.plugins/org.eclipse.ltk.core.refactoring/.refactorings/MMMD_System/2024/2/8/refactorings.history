@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;junit-platform.properties&apos; to &apos;MMMD.Test_Cases.End2endProcess.End2End_PositveFlow.java&apos;&#x0D;&#x0A;- Original project: &apos;MMMD_System&apos;&#x0D;&#x0A;- Destination element: &apos;MMMD.Test_Cases.End2endProcess.End2End_PositveFlow.java&apos;&#x0D;&#x0A;- Original element: &apos;junit-platform.properties&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move file" destination="/src=/optional=/true=/=/maven.pomderived=/true=/&lt;MMMD.Test_Cases.End2endProcess{End2End_PositveFlow.java" element1="junit-platform.properties" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1708625200280" units="0" version="1.0"/>
+</session>

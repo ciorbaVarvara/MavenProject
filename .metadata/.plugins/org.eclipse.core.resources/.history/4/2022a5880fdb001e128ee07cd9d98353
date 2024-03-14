@@ -1,0 +1,57 @@
+package MMMD.Test_Cases.Eligibility;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import MMMD.Application_Forms;
+import MMMD.Eligibilities_Validation;
+import MMMD.Global_Variables;
+import MMMD.ServiceDescription;
+import MMMD.ZamPass;
+
+public class Mineral_Processing_Licence extends Global_Variables {
+	
+	@BeforeTest(groups = { "largeScale", "smallScale", "NonAndRadioactive", "Radioactive", "NonRadioactive", "indivdualApplicant" })
+	public void login() throws InterruptedException {
+
+		driver = new ChromeDriver();
+		driver.get(urlEFPortal);
+		driver.manage().window().maximize();
+
+		// login in EFilling
+		ZamPass loginEF = new ZamPass(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+	}
+	
+	public static void mineralProcessingLicenceIndividual () throws InterruptedException {
+		
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+		
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.caseDetailsForm(Category[2], Customer[0], CustomerID[1]); 
+
+		serviceForms.applicationFormMineralProcessing("15");
+		
+		Eligibilities_Validation serviceEligibility = new Eligibilities_Validation(driver);
+	    serviceEligibility.eligibilityVerification(Category[2], Customer[0], null, null); 		   
+			   
+		}
+	
+	public static void mineralProcessingLicenceOrganization () throws InterruptedException {
+		
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+		
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.caseDetailsForm(Category[2], Customer[1], CustomerID[1]); 
+
+		serviceForms.applicationFormMineralProcessing("15");
+		
+		Eligibilities_Validation serviceEligibility = new Eligibilities_Validation(driver);
+	    serviceEligibility.eligibilityVerification(Category[2], Customer[1], null, null); 		   
+			   
+		}
+
+	}
+

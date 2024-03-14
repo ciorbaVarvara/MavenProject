@@ -1,0 +1,52 @@
+package MMMD.Test_Cases.Payment;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import MMMD.ApplicationForm;
+import MMMD.EligibilityValidation;
+import MMMD.GlobalVariables;
+import MMMD.ServiceDescription;
+import MMMD.ZamPass;
+import MMMD.ZamPay;
+
+public class MineralProcessing extends GlobalVariables {
+
+	@BeforeTest
+	public void login() throws InterruptedException {
+
+		driver = new ChromeDriver();
+		driver.get(urlEFPortal);
+		driver.manage().window().maximize();
+
+		// login in EFilling
+		ZamPass loginEF = new ZamPass(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+	}
+	
+	@Test
+	public static void Pay_For_Mineral_Processing() throws InterruptedException {
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+
+		// Individual:
+		ApplicationForm serviceForms = new ApplicationForm(driver);
+		serviceForms.caseDetailsForm(Category[2], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormMineralProcessing("15");
+
+		EligibilityValidation serviceEligibility = new EligibilityValidation(driver);
+		serviceEligibility.eligibilityVerification(Category[2], Customer[0], null, null);
+
+		serviceForms.goToNextGS_1();
+
+		ZamPay payment = new ZamPay(driver);
+
+		payment.paymentWithMTN(phoneNumbers[0]);
+
+	}
+
+}

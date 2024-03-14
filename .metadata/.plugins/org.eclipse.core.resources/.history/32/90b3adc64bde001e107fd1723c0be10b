@@ -1,0 +1,128 @@
+package MMMD;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class ZamPass_ extends AbstractComponents {
+
+	WebDriver driver;
+
+	public ZamPass_(WebDriver driver) {
+		super(driver);
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+
+//EFilling
+	@FindBy(xpath = "//a[contains(text(),\" ZamPortal - Government e-Services Directory \")]")
+	WebElement logoZamPortal;
+
+	@FindBy(xpath = "(//a[@class=\"nav-link link-dark pointer-event d-flex align-items-center px-1 py-md-0 h-100 ps-md-0 pe-md-2\"])[1]")
+	WebElement signIn_Btn;
+
+	@FindBy(xpath = "//h4[contains(text(),\" Zambia Integrated Governmental Services \")]")
+	WebElement logoZamPass;
+
+	@FindBy(xpath = "//button[contains(text(),\" Login with ZamPass \")]")
+	WebElement loginWithZamPassBtn;
+
+	@FindBy(xpath = "//div[contains(text(),\"ZamPass - National Digital Identity and Authentication Service\")]")
+	WebElement logoZamPassPage;
+
+	@FindBy(xpath = "//input[@type=\"text\"] ")
+	WebElement usernameField;
+	@FindBy(xpath = "//input[@type=\"password\"]")
+	WebElement passwordField;
+	@FindBy(xpath = "//button[contains(text(),\"Sign in\")]")
+	WebElement signInBtn2;
+
+	@FindBy(xpath = "(//a[@id=\"profileNavbarDropdown\"])[1]")
+	WebElement userField;
+
+//Intranet
+	@FindBy(xpath = "//h1[contains(text(),\"Welcome\")]")
+	WebElement I_welcomeH;
+	@FindBy(xpath = "//*[contains(text(),\"Login with ZamPass\")]")
+	WebElement I_loginWithZamPassBtn;
+
+	public void loginInIntranet(String username, String password, String user) {
+
+		wait(I_welcomeH);
+		wait(I_loginWithZamPassBtn);
+		I_loginWithZamPassBtn.click();
+
+		wait(passwordField);
+		passwordField.sendKeys(password);
+
+		wait(signInBtn2);
+		signInBtn2.click();
+
+	}
+
+	public void loginInIntranetDirectly(String username, String password, String user) {
+
+		wait(I_welcomeH);
+		wait(I_loginWithZamPassBtn);
+		I_loginWithZamPassBtn.click();
+
+		wait(usernameField);
+		usernameField.sendKeys(username);
+		wait(passwordField);
+		passwordField.sendKeys(password);
+		wait(signInBtn2);
+		signInBtn2.click();
+
+	}
+
+	public void loginInEF(Object[][] object) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(logoZamPortal);
+		if (logoZamPortal.isDisplayed()) {
+			System.out.println("EServices Directory is accessible");
+			wait(signIn_Btn);
+			// signIn_Btn.click();
+			js.executeScript("arguments[0].click();", signIn_Btn);
+
+		} else
+			System.out.println("Error: EServices Directory cannot be accessed");
+
+		wait(logoZamPass);
+		if (logoZamPass.isDisplayed()) {
+			System.out.println("Applicant can proceed to sign in");
+			wait(loginWithZamPassBtn);
+			loginWithZamPassBtn.click();
+		} else
+			System.out.println("Error: Applicant cannot proceed to sign in");
+
+		wait(logoZamPassPage);
+		if (logoZamPassPage.isDisplayed()) {
+			System.out.println("ZamPass page is displayed");
+			wait(usernameField);
+			usernameField.sendKeys(username);
+			wait(passwordField);
+			passwordField.sendKeys(password);
+			wait(signInBtn2);
+			signInBtn2.click();
+		} else
+			System.out.println("Error: Applicant cannot fill in the ZamPass form");
+
+		wait(logoZamPortal);
+		wait(userField);
+		String a = userField.getText();
+		System.out.print("User is: ");
+		System.out.println(a);
+
+		if (a.contains(user)) {
+			System.out.println("Login is passed");
+		} else
+			System.out.println("Login is failed");
+
+	}
+
+
+}

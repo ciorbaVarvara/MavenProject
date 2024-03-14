@@ -1,0 +1,60 @@
+1709577786540	Delete element
+1709577792420	Delete element
+1709578724909	Move file
+1709578727666	Move file
+1709578855163	Delete element
+1709580323735	Rename type 'Payment_Exploration_Licence_Large'
+1709580336376	Rename type 'Payment_Exploration_Licence_Small'
+1709580346369	Rename type 'Payment_MineralProcessing'
+1709580354637	Rename type 'Payment_Mining_Licence_Artisanal'
+1709580364740	Rename type 'Payment_Mining_Licence_Large'
+1709580376985	Rename type 'Payment_Mining_Licence_Small'
+1709643530153	Copy file
+1709647132315	Rename type 'Individual_Exploration_LargeScale_Non_Radioactive'
+1709648711816	Delete element
+1709648819204	Rename type 'Individual_Mining_Artisanal_Non_Radioactive'
+1709648836211	Rename type 'Exploration_Licence_Large'
+1709649876078	Delete element
+1709649882207	Delete element
+1709649907998	Delete element
+1709649914961	Delete element
+1709649921622	Delete element
+1709649927467	Delete element
+1709653298028	Delete element
+1709653304654	Delete element
+1709653310194	Delete element
+1709653316170	Delete element
+1709653321631	Delete element
+1709653325928	Delete element
+1709653332972	Delete element
+1709653338425	Delete element
+1709653443623	Rename type 'Organization_MineralProcessing'
+1709654918853	Rename type 'Exploration_Licence_Large'
+1709655046320	Delete element
+1709656057475	Rename type 'Mineral_Processing'
+1709656452323	Rename type 'Mining_Licence_Artisanal'
+1709656472081	Delete element
+1709656477767	Delete element
+1709656647523	Rename type 'Inspection_Process'
+1709656688006	Delete element
+1709656727018	Rename type 'AbstractComponents'
+1709656773665	Rename type 'ApplicationForm'
+1709656908514	Rename type 'EligibilityValidation'
+1709656922375	Delete element
+1709656954216	Rename type 'GlobalVariables'
+1709657026133	Rename type 'ServiceDescription'
+1709657041315	Rename type 'ZamPass'
+1709657052573	Rename type 'ZamPay'
+1709658638479	Copy file
+1709667881507	Rename method 'login'
+1709667911565	Rename method 'login'
+1709668321189	Copy file
+1709824696076	Rename method 'setUp'
+1709825400493	Rename type 'Abstract_Components'
+1709826185208	Rename type 'Global_Variables'
+1709835141514	Rename type 'Exploration_Licence_Large'
+1709835185882	Delete element
+1709835410698	Delete element
+1709835478003	Delete element
+1709835494575	Rename type 'Mining_Licence_Artisanal'
+1709835510841	Rename type 'MineralProcessing'

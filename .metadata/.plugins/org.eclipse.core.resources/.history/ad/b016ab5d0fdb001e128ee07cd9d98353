@@ -1,0 +1,133 @@
+package MMMD.Test_Cases.ApplicationForm;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import MMMD.Application_Forms;
+import MMMD.GlobalVariables;
+import MMMD.ServiceDescription;
+import MMMD.ZamPass;
+
+public class Exploration_Licence extends GlobalVariables {
+
+	@BeforeTest(groups = { "largeScale", "smallScale", "NonAndRadioactive", "Radioactive", "NonRadioactive",
+			"indivdualApplicant" })
+	public void login() throws InterruptedException {
+
+		driver = new ChromeDriver();
+		driver.get(urlEFPortal);
+		driver.manage().window().maximize();
+
+		// login in EFilling
+		ZamPass loginEF = new ZamPass(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+	}
+
+	@Test
+	public static void large_applyFor_RadioactiveMinerals() throws InterruptedException {
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+		// sd.serviceDescriptionValidation(ServiceText, FeeText, ProcessingTimeText,
+		// ValidityText);
+
+		// Individual:
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormLargeRadioactive(Category[1]);
+
+	}
+
+	@Test
+	public static void large_applyForNon_RadioactiveMinerals() throws InterruptedException {
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+
+		// Individual:
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormLargeNonRadioactive(Category[1]);
+
+	}
+
+	@Test
+	public void large_applyForNon_And_RadioactiveMinerals() throws InterruptedException {
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+
+		// Individual:
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormLargeNon_And_Radioactive(Category[1]);
+
+	}
+
+	@Test
+	public static void small_applyFor_RadioactiveMinerals() throws InterruptedException {
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+		// sd.serviceDescriptionValidation(ServiceText, FeeText, ProcessingTimeText,
+		// ValidityText);
+
+		// Individual:
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormSmallRadioactive(Category[1]);
+
+	}
+
+	@Test
+	public static void small_applyForNon_RadioactiveMinerals() throws InterruptedException {
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+
+		// Individual:
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormSmallNonRadioactive(Category[1]);
+
+	}
+
+	@Test
+	public void small_applyForNon_And_RadioactiveMinerals() throws InterruptedException {
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+
+		// Individual:
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormSmallNon_And_Radioactive(Category[1]);
+
+	}
+
+}
+
+/*
+ * if (serviceCateogry == "Mining Licence" || serviceCateogry ==
+ * "Exploration Licence" & scaleType=="Large Scale (399.7 - 24,925.05 ha)" &
+ * mineralType=="Non-Radioactive") {
+ * 
+ * 
+ * public static final String[] Category = new String[] { "Mining Licence",
+ * "Exploration Licence", "Mineral Processing Licence"};
+ * 
+ * public static final String[] ScaleOfOperation = new String[] {
+ * "Artisanal (not exceeding 9.98 ha)", "Large Scale (399.7 - 24,925.05 ha)",
+ * "Small Scale (9.99 - 399.6 ha)"};
+ * 
+ * public static final String[] MineralsType = new String[] { "Non-Radioactive",
+ * "Radioactive", "Radioactive and Non-Radioactive"};
+ */

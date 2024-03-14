@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Exploration Licence">
+	<parameter name="CategoryName" value="Exploration Licence" />
+	<parameter name="CustomerID" value="727110111" />
+	<parameter name="ScaleOfOperation" value="Large" />
+	<parameter name="MineralsType" value="Non-Radioactive" />
+
+	<test name="Large Scale">
+		<classes>
+			<class
+				name="MMMD.Test_Cases.Eligibility.Exploration_Licence">
+				<methods>
+					<!--	<include name="explorationLarge_Radioactive" />   -->
+				</methods>
+
+			</class>
+
+		</classes>
+	</test>
+
+	<!--		<test name="Mining Licence">
+		<classes>
+			<class
+				name="MMMD.Test_Cases">
+				<methods>
+					<include
+						name="Pay_For_Mining_Licence_Large_RadioActive" />
+					<include
+						name="Pay_For_Mining_Licence_Large_NonRadioactive" />
+					<include
+						name="Pay_For_Mining_Licence_Large_AndNonRadioactive" />
+					<include
+						name="Pay_For_Mining_Licence_Small_Radioactive" />
+					<include
+						name="Pay_For_Mining_Licence_Small_NonRadioactive" />
+					<include
+						name="Pay_For_Mining_Licence_Small_AndNonRadioactive" />
+					<include
+						name="Pay_For_Mining_Licence_Artisanal_Radioactive" />
+					<include
+						name="Pay_For_Mining_Licence_Artisanal_NonRadioactive" />
+					<include
+						name="Pay_For_Mining_Licence_Artisanal_AndNonRadioactive" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+	<test name="Mineral Processing Licence">
+		<classes>
+			<class
+				name="MMMD.Test_Cases">
+				<methods>
+					<include
+						name="Pay_For_Mineral_Processing" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+ -->
+</suite>

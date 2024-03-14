@@ -1,0 +1,178 @@
+package MMMD.Test_Cases.Eligibility;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import MMMD.Application_Forms;
+import MMMD.Eligibilities_Validation;
+import MMMD.GlobalVariables;
+import MMMD.Service_Description;
+import MMMD.ZamPass_;
+
+public class Exploration_Licence extends GlobalVariables {
+
+	public Service_Description MiningAndNonMiningRightsLicenceService;
+	public Application_Forms serviceForms;
+	public Eligibilities_Validation serviceEligibility;
+
+	@BeforeTest
+	public void main() {
+
+		driver = new ChromeDriver();
+		driver.get(urlEFPortal);
+		driver.manage().window().maximize();
+
+		ZamPass_ loginEF = new ZamPass_(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+		MiningAndNonMiningRightsLicenceService = PageFactory.initElements(driver, Service_Description.class);
+		serviceForms = PageFactory.initElements(driver, Application_Forms.class);
+		serviceEligibility = PageFactory.initElements(driver, Eligibilities_Validation.class);
+
+	}
+
+	@BeforeMethod
+	@Parameters({"CategoryName"})
+	public void preRequiests() throws InterruptedException {
+
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+
+	}
+
+	@AfterMethod
+	public void afterMethod() {
+
+		MiningAndNonMiningRightsLicenceService.goToEServicesDirecotry();
+	}
+
+	@Test	
+	public void explorationLarge_Radioactive(String CategoryName) {
+
+		serviceForms.caseDetailsForm(CategoryName, Customer[0], CustomerID[0]);
+		serviceForms.applicationFormLargeRadioactive(CategoryName);
+		serviceEligibility.eligibilityVerification(CategoryName, Customer[0], ScaleOfOperation[1], MineralsType[1]);
+
+		
+	}
+
+	@Test
+	public void explorationLarge_NonRadioactive(String CategoryName) {
+
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+		serviceForms.applicationFormLargeNonRadioactive(Category[1]);
+		serviceEligibility.eligibilityVerification(Category[1], Customer[0], ScaleOfOperation[1], MineralsType[0]);
+	}
+
+	/*
+	@Test(groups = { "largeScale", "NonAndRadioactive", "indivdualApplicant" })
+	public void explorationLarge_Non_And_Radioactive() throws InterruptedException {
+
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+		serviceForms.applicationFormLargeNon_And_Radioactive(Category[1]);
+		serviceEligibility.eligibilityVerification(Category[1], Customer[0], ScaleOfOperation[1], MineralsType[2]);
+
+	}
+
+	@Test(groups = { "smallScale", "Radioactive", "indivdualApplicant" })
+	public void explorationSmall_Radioactive() throws InterruptedException {
+
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+		serviceForms.applicationFormSmallRadioactive(Category[1]);
+		serviceEligibility.eligibilityVerification(Category[1], Customer[0], ScaleOfOperation[2], MineralsType[1]);
+
+	}
+
+	@Test(groups = { "smallScale", "NonRadioactive", "indivdualApplicant" })
+	public void explorationSmall_NonRadioactive() throws InterruptedException {
+
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+		serviceForms.applicationFormSmallNonRadioactive(Category[1]);
+		serviceEligibility.eligibilityVerification(Category[1], Customer[0], ScaleOfOperation[2], MineralsType[0]);
+
+	}
+
+	@Test(groups = { "smallScale", "NonAndRadioactive", "indivdualApplicant" })
+	public void explorationSmall_Non_And_Radioactive() throws InterruptedException {
+
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+		serviceForms.applicationFormSmallNon_And_Radioactive(Category[1]);
+		serviceEligibility.eligibilityVerification(Category[1], Customer[0], ScaleOfOperation[2], MineralsType[2]);
+
+	}
+
+//ORGANIZATION
+
+	@Test(groups = { "largeScale", "Radioactive", "organizationApplicant" })
+	public void O_explorationLarge_Radioactive() throws InterruptedException {
+
+		serviceForms.caseDetailsForm(Category[1], Customer[1], CustomerID[1]);
+		serviceForms.applicationFormLargeRadioactive(Category[1]);
+		serviceEligibility.eligibilityVerification(Category[1], Customer[1], ScaleOfOperation[1], MineralsType[1]);
+
+	}
+
+	@Test(groups = { "largeScale", "NonRadioactive", "organizationApplicant" })
+	public void O_explorationLarge_NonRadioactive() throws InterruptedException {
+
+		serviceForms.caseDetailsForm(Category[1], Customer[1], CustomerID[1]);
+		serviceForms.applicationFormLargeNonRadioactive(Category[1]);
+		serviceEligibility.eligibilityVerification(Category[1], Customer[1], ScaleOfOperation[1], MineralsType[0]);
+
+	}
+
+	@Test(groups = { "largeScale", "NonAndRadioactive", "organizationApplicant" })
+	public void O_explorationLarge_Non_And_Radioactive() throws InterruptedException {
+
+		serviceForms.caseDetailsForm(Category[1], Customer[1], CustomerID[1]);
+		serviceForms.applicationFormLargeNonRadioactive(Category[1]);
+		serviceEligibility.eligibilityVerification(Category[1], Customer[1], ScaleOfOperation[1], MineralsType[2]);
+
+	}
+
+	@Test(groups = { "smallScale", "Radioactive", "organizationApplicant" })
+	public void O_explorationSmall_Radioactive() throws InterruptedException {
+
+		serviceForms.caseDetailsForm(Category[1], Customer[1], CustomerID[1]);
+		serviceForms.applicationFormSmallRadioactive(Category[1]);
+		serviceEligibility.eligibilityVerification(Category[1], Customer[1], ScaleOfOperation[2], MineralsType[1]);
+
+	}
+
+	@Test(groups = { "smallScale", "NonRadioactive", "organizationApplicant" })
+	public void O_explorationSmall_NonRadioactive() throws InterruptedException {
+
+		serviceForms.caseDetailsForm(Category[1], Customer[1], CustomerID[1]);
+		serviceForms.applicationFormSmallNonRadioactive(Category[1]);
+		serviceEligibility.eligibilityVerification(Category[1], Customer[1], ScaleOfOperation[2], MineralsType[0]);
+	}
+
+	@Test(groups = { "smallScale", "NonAndRadioactive", "organizationApplicant" })
+	public void O_explorationSmall_Non_And_Radioactive() throws InterruptedException {
+
+		serviceForms.caseDetailsForm(Category[1], Customer[1], CustomerID[1]);
+		serviceForms.applicationFormSmallNon_And_Radioactive(Category[1]);
+		serviceEligibility.eligibilityVerification(Category[1], Customer[1], ScaleOfOperation[2], MineralsType[2]);
+
+	}
+*/	
+}
+
+/*
+ * //Service settings: public static final String[] Category = new String[] {
+ * "Mining Licence", "Exploration Licence", "Mineral Processing Licence"};
+ * 
+ * public static final String[] ScaleOfOperation = new String[] {
+ * "Artisanal (not exceeding 9.98 ha)", "Large Scale (399.7 - 24,925.05 ha)",
+ * "Small Scale (9.99 - 399.6 ha)"};
+ * 
+ * public static final String[] MineralsType = new String[] { "Non-Radioactive",
+ * "Radioactive", "Radioactive and Non-Radioactive"};
+ * 
+ */
+/*
+ * "Non-Radioactive", "Radioactive", "Radioactive and Non-Radioactive"};
+ */

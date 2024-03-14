@@ -1,0 +1,35 @@
+package MMMD.Test_Cases.Payment;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import MMMD.Application_Forms;
+import MMMD.Eligibilities_Validation;
+import MMMD.GlobalVariables;
+import MMMD.Service_Description;
+import MMMD.ZamPass_;
+import MMMD.ZamPay_;
+
+public class Mining_Licence_Large extends GlobalVariables {
+	
+	public Service_Description MiningAndNonMiningRightsLicenceService;
+	public Application_Forms serviceForms;
+	public Eligibilities_Validation serviceEligibility; 
+	
+	@BeforeTest(groups = { "largeScale", "NonAndRadioactive", "radioactive", "NonRadioactive", "indivdualApplicant" })
+	public void login() throws InterruptedException {
+
+		driver = new ChromeDriver();
+		driver.get(urlEFPortal);
+		driver.manage().window().maximize();
+
+		// login in EFilling
+		ZamPass_ loginEF = new ZamPass_(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+	}
+	
+
+
+}

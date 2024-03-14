@@ -1,0 +1,113 @@
+package MMMD.Test_Cases.Payment;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import MMMD.ApplicationForm;
+import MMMD.GlobalVariables;
+import MMMD.ServiceDescription;
+import MMMD.ZamPass;
+import MMMD.ZamPay;
+
+public class Exploration_Licence_Large extends GlobalVariables {
+
+
+	@BeforeTest
+	public static void login() {
+
+		driver = new ChromeDriver();
+		driver.get("https://mmmdui.dotgov.cloud/services");
+		driver.manage().window().maximize();
+
+		// login in EFilling
+		ZamPass loginEF = new ZamPass(driver);
+		loginEF.loginInEF(Username, Password, User);
+	}
+
+	@Test
+	public static void Pay_For_Exloration_Licence_Large_RadioActive() {
+
+		/*
+		 * WebDriver driver = new ChromeDriver();
+		 * driver.get("https://mmmdui.dotgov.cloud/services");
+		 * driver.manage().window().maximize();
+		 * 
+		 * // login in EFilling ZamPass loginEF = new ZamPass(driver);
+		 * loginEF.loginInEF(Username, Password, User);
+		 */
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+		// sd.serviceDescriptionValidation(ServiceText, FeeText, ProcessingTimeText,
+		// ValidityText);
+
+		ApplicationForm serviceForms = new ApplicationForm(driver);
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormLargeRadioactive(Category[1]);
+
+		serviceForms.goToNextGS_1();
+
+		ZamPay payment = new ZamPay(driver);
+		payment.paymentWithMTN(phoneNumbers[0]);
+
+	}
+
+/*	@Test
+	public static void Pay_For_Exloration_Licence_Large_NonRadioactive() {
+
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://mmmdui.dotgov.cloud/services");
+		driver.manage().window().maximize();
+
+		// login in EFilling
+		ZamPass loginEF = new ZamPass(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+		// sd.serviceDescriptionValidation(ServiceText, FeeText, ProcessingTimeText,
+		// ValidityText);
+
+		ApplicationForm serviceForms = new ApplicationForm(driver);
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormLargeNonRadioactive(Category[1]);
+
+		serviceForms.goToNextGS_1();
+
+		ZamPay payment = new ZamPay(driver);
+		payment.paymentWithMTN(phoneNumbers[0]);
+
+	}
+
+	@Test
+	public static void Pay_For_Exloration_Licence_Large_RadioAndNonRadioactive() {
+
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://mmmdui.dotgov.cloud/services");
+		driver.manage().window().maximize();
+
+		// login in EFilling
+		ZamPass loginEF = new ZamPass(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+		// sd.serviceDescriptionValidation(ServiceText, FeeText, ProcessingTimeText,
+
+		ApplicationForm serviceForms = new ApplicationForm(driver);
+		serviceForms.caseDetailsForm(Category[1], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormLargeNon_And_Radioactive(Category[1]);
+
+		serviceForms.goToNextGS_1();
+
+		ZamPay payment = new ZamPay(driver);
+		payment.paymentWithMTN(phoneNumbers[0]);
+
+	}
+*/
+}

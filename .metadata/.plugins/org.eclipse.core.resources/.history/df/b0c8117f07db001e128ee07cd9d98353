@@ -1,0 +1,80 @@
+package MMMD.Test_Cases.Eligibility;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeTest;
+
+import MMMD.ApplicationForm;
+import MMMD.EligibilityValidation;
+import MMMD.GlobalVariables;
+import MMMD.ServiceDescription;
+import MMMD.ZamPass;
+
+public class Mineral_Processing_Licence extends GlobalVariables {
+	
+	@BeforeTest(groups = { "largeScale", "smallScale", "NonAndRadioactive", "Radioactive", "NonRadioactive", "indivdualApplicant" })
+	public void login() throws InterruptedException {
+
+		driver = new ChromeDriver();
+		driver.get(urlEFPortal);
+		driver.manage().window().maximize();
+
+		// login in EFilling
+		ZamPass loginEF = new ZamPass(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+	}
+	
+	public static void mineralProcessingLicenceIndividual () throws InterruptedException {
+		
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+		
+		ApplicationForm serviceForms = new ApplicationForm(driver);
+		serviceForms.caseDetailsForm(Category[2], Customer[1], CustomerID[1]); 
+
+		serviceForms.applicationFormMineralProcessing("15");
+		
+		EligibilityValidation serviceEligibility = new EligibilityValidation(driver);
+	    serviceEligibility.eligibilityVerification(Category[2], Customer[1], null, null); 
+
+	    
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	//	ZamPay paymentProcess = new ZamPay(driver);
+	//	paymentProcess.payment(card_number, expiry_month, expiry_year, cvv, card_name);
+		
+		
+		
+		
+				
+			
+			 
+			  	   
+			   
+			   
+		}
+
+	}
+

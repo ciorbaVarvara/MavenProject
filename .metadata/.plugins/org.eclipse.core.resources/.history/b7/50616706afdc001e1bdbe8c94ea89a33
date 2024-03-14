@@ -1,0 +1,64 @@
+package MMMD.Test_Cases.Payment;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import MMMD.Application_Forms;
+import MMMD.Eligibilities_Validation;
+import MMMD.GlobalVariables;
+import MMMD.Service_Description;
+import MMMD.ZamPass_;
+import MMMD.ZamPay_;
+
+public class Mining_Licence_Small extends GlobalVariables {
+
+	public Service_Description MiningAndNonMiningRightsLicenceService;
+	public Application_Forms serviceForms;
+	public Eligibilities_Validation serviceEligibility; 
+	
+	@BeforeTest(groups = { "largeScale", "NonAndRadioactive", "radioactive", "NonRadioactive", "indivdualApplicant" })
+	public void login() throws InterruptedException {
+
+		driver = new ChromeDriver();
+		driver.get(urlEFPortal);
+		driver.manage().window().maximize();
+
+		// login in EFilling
+		ZamPass_ loginEF = new ZamPass_(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+	}
+
+	@Test
+	public void Pay_For_Mining_Licence_Small_Radioactive() throws InterruptedException {
+
+
+		serviceForms.caseDetailsForm(Category[0], Customer[0], CustomerID[0]);
+		serviceForms.applicationFormSmallRadioactive(Category[0]);
+		serviceForms.goToNextGS_1();
+		pay.paymentWithMTN(phoneNumbers[0]);
+
+	}
+
+	@Test
+	public void Pay_For_Mining_Licence_Small_NonRadioactive() throws InterruptedException {
+
+		serviceForms.caseDetailsForm(Category[0], Customer[0], CustomerID[0]);
+		serviceForms.applicationFormSmallNonRadioactive(Category[0]);
+		serviceForms.goToNextGS_1();
+		pay.paymentWithMTN(phoneNumbers[0]);
+
+	}
+
+	@Test
+	public void Pay_For_Mining_Licence_Small_NonAndRadioactive() throws InterruptedException {
+
+		serviceForms.caseDetailsForm(Category[0], Customer[0], CustomerID[0]);
+		serviceForms.applicationFormSmallNon_And_Radioactive(Category[0]);
+		serviceForms.goToNextGS_1();
+		pay.paymentWithMTN(phoneNumbers[0]);
+
+	}
+
+}

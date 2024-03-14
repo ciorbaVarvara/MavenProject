@@ -1,0 +1,55 @@
+package learning;
+
+import java.util.ArrayList;
+
+import org.testng.annotations.Test;
+
+public class test {
+
+	@Test
+	public void arrayList () {
+		
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("Abffff");
+		list.add("afdssdf");
+		list.add("dsdfgdgf");
+		list.add("Agggg");
+		
+		int count = 0;
+		
+		for ( int i=0; i<list.size(); i++) {
+			
+			String a = list.get(i);
+			if (a.startsWith("A")) 
+			
+			{
+				count ++;
+
+			}
+			
+		}
+		System.out.println(count);
+		
+		
+		
+	}
+	
+	@Test
+	public void arrayListStream () {
+		
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("Abffff");
+		list.add("afdssdf");
+		list.add("dsdfgdgf");
+		list.add("Agggg");
+		
+		System.out.println(list.stream().filter(s->s.startsWith("A")).count());
+		
+		
+		
+		
+		
+	}
+	
+	
+}

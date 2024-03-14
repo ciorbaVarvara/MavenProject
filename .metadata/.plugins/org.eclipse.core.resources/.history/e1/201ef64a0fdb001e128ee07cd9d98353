@@ -1,0 +1,20 @@
+package MMMD;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+
+public class ExtraPayment extends Abstract_Components {
+
+	public ExtraPayment(WebDriver driver) {
+		super(driver);
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	
+
+
+
+
+
+}

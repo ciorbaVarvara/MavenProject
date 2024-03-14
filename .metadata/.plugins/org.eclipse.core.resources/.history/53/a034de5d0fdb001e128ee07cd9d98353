@@ -1,0 +1,82 @@
+package MMMD.Test_Cases.Payment;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import MMMD.Application_Forms;
+import MMMD.GlobalVariables;
+import MMMD.ServiceDescription;
+import MMMD.ZamPass;
+import MMMD.ZamPay;
+
+public class Mining_Licence_Large extends GlobalVariables {
+	
+	@BeforeTest(groups = { "largeScale", "NonAndRadioactive", "radioactive", "NonRadioactive", "indivdualApplicant" })
+	public void login() throws InterruptedException {
+
+		driver = new ChromeDriver();
+		driver.get(urlEFPortal);
+		driver.manage().window().maximize();
+
+		// login in EFilling
+		ZamPass loginEF = new ZamPass(driver);
+		loginEF.loginInEF(Username, Password, User);
+
+	}
+	
+	@Test
+	public static void Pay_For_Mining_Licence_Large_Radioactive() throws InterruptedException {
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+
+		// Individual:
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.caseDetailsForm(Category[0], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormLargeRadioactive(Category[0]);
+
+		serviceForms.goToNextGS_1();
+
+		ZamPay payment = new ZamPay(driver);
+		payment.paymentWithMTN(phoneNumbers[0]);
+	}
+
+	@Test
+	public static void Pay_For_Mining_Licence_Large_NonRadioactive() throws InterruptedException {
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+
+		// Individual:
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.caseDetailsForm(Category[0], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormLargeNonRadioactive(Category[0]);
+
+		serviceForms.goToNextGS_1();
+
+		ZamPay payment = new ZamPay(driver);
+		payment.paymentWithMTN(phoneNumbers[0]);
+	}
+
+	@Test
+	public static void Pay_For_Mining_Licence_Large_AndNonRadioactive() throws InterruptedException {
+
+		ServiceDescription MiningAndNonMiningRightsLicenceService = new ServiceDescription(driver);
+		MiningAndNonMiningRightsLicenceService.chooseService(Service);
+
+		// Individual:
+		Application_Forms serviceForms = new Application_Forms(driver);
+		serviceForms.caseDetailsForm(Category[0], Customer[0], CustomerID[0]);
+
+		serviceForms.applicationFormLargeNon_And_Radioactive(Category[0]);
+
+		serviceForms.goToNextGS_1();
+
+		ZamPay payment = new ZamPay(driver);
+		payment.paymentWithMTN(phoneNumbers[0]);
+	}
+
+}

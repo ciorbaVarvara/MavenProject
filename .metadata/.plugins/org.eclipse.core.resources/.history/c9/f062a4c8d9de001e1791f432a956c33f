@@ -1,0 +1,65 @@
+package learning;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.stream.Stream;
+
+import org.testng.annotations.Test;
+
+public class test {
+
+	//@Test
+	public void arrayList () {
+		
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("Abffff");
+		list.add("afdssdf");
+		list.add("dsdfgdgf");
+		list.add("Agggg");
+		
+		int count = 0;
+		
+		for ( int i=0; i<list.size(); i++) {
+			
+			String a = list.get(i);
+			if (a.startsWith("A")) 
+			
+			{
+				count ++;
+
+			}
+			
+		}
+		System.out.println(count);
+		
+		
+		
+	}
+	
+	@Test
+	public void arrayListStream () {
+		
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("Abffff");
+		list.add("afdssdf");
+		list.add("dsdfgdgf");
+		list.add("Ag");
+		
+		//System.out.println("Stream : " + list.stream().filter(s->s.startsWith("A")).count());
+		
+		//list.stream().filter(s->s.startsWith("A")).forEach(s->System.out.println("Stream 2 " + s));
+		//list.stream().filter(s->s.length()<3).filter(s->s.startsWith("A")).forEach(s->System.out.println("Stream 2 " + s));
+		
+		Stream<String> a = Stream.of("sss", "ddd");
+		//a.filter(s->s.startsWith("d")).forEach(s->System.out.println("stream a: " + s));
+		a.filter(s->s.equals("sss")).forEach(s->System.out.println(s));
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+}

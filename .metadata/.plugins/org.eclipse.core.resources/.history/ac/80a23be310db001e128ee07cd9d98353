@@ -1,0 +1,194 @@
+package MMMD;
+
+import java.util.ArrayList;
+import java.util.TreeSet;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver.TargetLocator;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class ZamPay_ extends Abstract_Components {
+
+	WebDriver driver;
+
+	public ZamPay_(WebDriver driver) {
+		super(driver);
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+
+	@FindBy(xpath = "//h3[contains(text(),\"Pay for Service\")]")
+	WebElement payForServiceH;
+	@FindBy(xpath = "//button[@class=\"btn btn-lg btn-primary\"]")
+	WebElement payBtn_2;
+
+	// select mobile
+	@FindBy(xpath = "//p[contains(text(),\"Mobile \")]")
+	WebElement mobileH;//
+	@FindBy(xpath = "(//button[@class=\"btn btn-lg btn-primary\"])[2]")
+	WebElement selectBtn_Mobile;
+	// select MTN
+	@FindBy(xpath = "(//button[@class=\"btn btn-lg btn-primary w-100\"])[1]")
+	WebElement selectBtn_MTN;
+	// input number
+	@FindBy(xpath = "//input[@type=\"text\"]")
+	WebElement inputNoField;
+	// pay
+	@FindBy(xpath = "//button[@class=\"btn btn-primary\"]")
+	WebElement payWithMTN_Btn;
+
+	// select visa
+	@FindBy(xpath = "//p[contains(text(),\"Visa / Mastercard\")]")
+	WebElement visaH;
+	@FindBy(xpath = "(//button[@class=\"btn btn-lg btn-primary\"])[1]")
+	WebElement selectBtn_Visa;
+	// select stanbic bank
+	@FindBy(xpath = "//h4[contains(text(),\"You can pay via following payment processors\")]")
+	WebElement processorsH;
+	@FindBy(xpath = "(//button[@class=\"btn btn-lg btn-primary w-100\"])[4]")
+	WebElement selectBtn_Stanbik;
+
+	// Card Details:
+	@FindBy(xpath = "(//input[@class=\"input-item\"])[1]")
+	WebElement cardNumber;
+	@FindBy(xpath = "(//input[@class=\"input-item\"])[2]")
+	WebElement expiryMonth;
+	@FindBy(xpath = "(//input[@class=\"input-item\"])[3]")
+	WebElement expiryYear;
+	@FindBy(xpath = "(//input[@class=\"input-item\"])[4]")
+	WebElement securityCode;
+	@FindBy(xpath = "(//input[@class=\"input-item\"])[5]")
+	WebElement nameOfCard;
+
+	@FindBy(xpath = "//button[@class=\"ni-btn ni-btn-primary\"]")
+	WebElement payBtn_3;
+
+	// authentification succesful (old)
+	@FindBy(xpath = "//h1[@class=\"h1\"]")
+	WebElement sandboxH;
+	@FindBy(xpath = "//input[@value=\"Authentication Successful\"]")
+	WebElement auth;
+	@FindBy(xpath = "(//input[@value=\"Y\"])[1]")
+	WebElement x;
+
+	// next btn
+	@FindBy(xpath = "//button[contains(text(),\"Next\")]")
+	WebElement next_btn;
+
+	// gs-2
+	@FindBy(xpath = "//h3[contains(text(),\"Preview Document\")]")
+	WebElement previewGS2_H;
+	@FindBy(xpath = "//button[contains(text(),\"Finish\")]")
+	WebElement finishBtn;
+	
+	@FindBy(xpath="//button[@class=\"btn btn-lg btn-outline-primary\"]")
+	WebElement previewReceiptBtn;
+
+	public void paymentWithStanbic(String cardNo, String month, String year, String code, String name) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(payForServiceH);
+		wait(payBtn_2);
+		// payBtn_2.click();
+		js.executeScript("arguments[0].click();", payBtn_2);
+
+		wait(visaH);
+		wait(selectBtn_Visa);
+		// selectBtn_Visa.click();
+		js.executeScript("arguments[0].click();", selectBtn_Visa);
+
+		wait(processorsH);
+		wait(selectBtn_Stanbik);
+		// selectBtn_Stanbik.click();
+		js.executeScript("arguments[0].click();", selectBtn_Stanbik);
+
+		// js.executeScript("document.body.style.zoom = '0.75'");
+
+		By span = By.xpath("//span[contains(text(),\"Payment\")]");
+		waitForVisibilityOfElementBy(span);
+
+		wait(cardNumber);
+		cardNumber.sendKeys(cardNo);
+		// js.executeScript("arguments[0].setAttribute('value','"+cardNo+"')",
+		// selectBtn_Stanbik);
+
+		wait(expiryMonth);
+		expiryMonth.sendKeys(month);
+
+		wait(expiryYear);
+		expiryYear.sendKeys(year);
+
+		wait(securityCode);
+		securityCode.sendKeys(code);
+
+		wait(nameOfCard);
+		nameOfCard.sendKeys(name);
+
+		wait(payBtn_3);
+		js.executeScript("arguments[0].click();", payBtn_3);
+
+		ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(1));
+		// System.out.println(driver.getTitle());
+		// String lastWindowHandle = new TreeSet<>(driver.getWindowHandles()).last();
+		// driver.switchTo().window(lastWindowHandle);
+
+		System.out.println(driver.getCurrentUrl());
+		System.out.println(driver.getTitle());
+
+		wait(sandboxH);
+		System.out.println(sandboxH.getText());
+
+		js.executeScript("arguments[0].submit();", x);
+	}
+
+	public void paymentWithMTN(String numberOfPhone) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(payForServiceH);
+		wait(payBtn_2);
+		// payBtn_2.click();
+		js.executeScript("arguments[0].click();", payBtn_2);
+
+		wait(mobileH);
+		wait(selectBtn_Mobile);
+		// selectBtn_Visa.click();
+		js.executeScript("arguments[0].click();", selectBtn_Mobile);
+
+		wait(processorsH);
+		wait(selectBtn_MTN);
+		// selectBtn_Stanbik.click();
+		js.executeScript("arguments[0].click();", selectBtn_MTN);
+		wait(payForServiceH);
+		wait(inputNoField);
+		inputNoField.sendKeys(numberOfPhone);
+		wait(payWithMTN_Btn);
+		js.executeScript("arguments[0].click();", payWithMTN_Btn);
+		
+		wait(previewReceiptBtn);
+
+		ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(1)).close();
+		driver.switchTo().window(tabs.get(0));
+
+
+		waitForPaymentConfirmation(next_btn);
+		js.executeScript("arguments[0].click();", next_btn);
+
+		// preview gs-2 and finsih the process
+		wait(previewGS2_H);
+		js.executeScript("arguments[0].click();", finishBtn);
+		
+		//driver.close();
+
+		// waitForElementToBeClickable(auth);
+		//// auth.click();
+		/// js.executeScript("arguments[0].click();", auth);
+
+	}
+
+}
