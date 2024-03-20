@@ -85,7 +85,7 @@ public class ZamPass_ extends AbstractComponents {
 	}
 
 	
-	public void loginInEF(final String username, String password, String user) {
+	public ZamPass_ loginInEF(String username, String password, String user) {
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -136,6 +136,8 @@ public class ZamPass_ extends AbstractComponents {
 			System.out.println("Login is passed");
 		} else
 			System.out.println("Login is failed");
+		
+		return null;
 
 	}
 

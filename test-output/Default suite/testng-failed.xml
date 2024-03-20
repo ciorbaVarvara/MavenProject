@@ -5,8 +5,8 @@
     <classes>
       <class name="zamOffice.Tests.ff">
         <methods>
-          <include name="large_applyFor_RadioactiveMinerals"/>
-          <include name="login"/>
+          <include name="large_applyFor"/>
+          <include name="loginToEF"/>
         </methods>
       </class> <!-- zamOffice.Tests.ff -->
     </classes>

@@ -43,18 +43,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
-		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
-		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
-
-
-		<dependency>
-			<groupId>automated_tests</groupId>
-			<artifactId>MMMD_System</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
-
         
 	</dependencies>
 

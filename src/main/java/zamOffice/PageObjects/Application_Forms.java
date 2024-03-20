@@ -1,6 +1,5 @@
 package zamOffice.PageObjects;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,12 +15,12 @@ public class Application_Forms extends AbstractComponents {
 
 	WebDriver driver;
 
-	public Application_Forms (WebDriver driver) {
+	public Application_Forms(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	// Case Details
 	@FindBy(xpath = "//p[contains(text(),\"Start Application\")]")
 	WebElement startApplicationBtn;
@@ -79,7 +78,7 @@ public class Application_Forms extends AbstractComponents {
 	// minerals table
 	@FindBy(xpath = "//h5[contains(text(),\" Minerals \")]")
 	WebElement mineralsH_0;
-	@FindBy(xpath = "(//button)[3]") 
+	@FindBy(xpath = "(//button)[3]")
 	WebElement addMineralsBtn;
 	@FindBy(xpath = "//h4[contains(text(),\" Minerals \")]")
 	WebElement mineralsH;
@@ -212,66 +211,157 @@ public class Application_Forms extends AbstractComponents {
 	}
 
 	// Case Details Form + Individual Form
-	public void caseDetailsForm(String serviceCategory, String customerType, String customerId) {
+	public void caseDetailsForm(String serviceCategory, String individual, String organization, String customerId) {
+		
+		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		wait(startApplicationBtn);
 		startApplicationBtn.click();
 
 		// fill in Case Details Form
 		wait(caseDetailsH);
-		if (caseDetailsH.isDisplayed()) {
-			System.out.println("Case Details Form is displayed");
-			wait(category);
-			category.sendKeys(serviceCategory);
-			category.sendKeys(Keys.ENTER);
+		wait(category);
+		category.sendKeys(serviceCategory);
+		category.sendKeys(Keys.ENTER);
 
-			if (customerType == "Individual") {
-				// choose customer type:
-				wait(customer);
-				customer.clear();
-				wait(openCustomerList);
-				openCustomerList.click();
-				wait(selectIndividual);
-				selectIndividual.click();
-				wait(customerID_Ind);
-				customerID_Ind.sendKeys(customerId);
-				wait(queryBtn_Ind);
-				queryBtn_Ind.click();
-				wait(nextBtn);
-				js.executeScript("arguments[0].click();", nextBtn);
+		wait(customer);
+		customer.clear();
+		wait(openCustomerList);
+		openCustomerList.click();
 
-				wait(applicantDetailsH);
+		if (individual != null) {
+			// choose customer type:
 
-				System.out.println("Applicant Details Form is displayed");
-				wait(nextBtn);
-				js.executeScript("arguments[0].click();", nextBtn);
-			}
-
-			else {
-				wait(customer);
-				customer.clear();
-				wait(openCustomerList);
-				openCustomerList.click();
-				wait(selectOrganization);
-				selectOrganization.click();
-				wait(customerID_Org);
-				customerID_Org.sendKeys(customerId);
-				wait(queryBtn_Org);
-				queryBtn_Org.click();
-				wait(nextBtn);
-				js.executeScript("arguments[0].click();", nextBtn);
-
-				wait(applicantDetailsH);
-				System.out.println("Applicant Details Form is displayed");
-				wait(nextBtn);
-				js.executeScript("arguments[0].click();", nextBtn);
-
-				wait(representativeH);
-				System.out.println("Representative Details Form is displayed");
-				wait(nextBtn);
-				js.executeScript("arguments[0].click();", nextBtn);
-			}
+			wait(selectIndividual);
+			selectIndividual.click();
+			wait(customerID_Ind);
+			customerID_Ind.sendKeys(customerId);
+			wait(queryBtn_Ind);
+			queryBtn_Ind.click();
+			wait(nextBtn);
+			js.executeScript("arguments[0].click();", nextBtn);
+			wait(applicantDetailsH);
+			System.out.println("Applicant Details Form is displayed");
+			wait(nextBtn);
+			js.executeScript("arguments[0].click();", nextBtn);
 		}
+
+		else {
+
+			wait(selectOrganization);
+			selectOrganization.click();
+			wait(customerID_Org);
+			customerID_Org.sendKeys(customerId);
+			wait(queryBtn_Org);
+			queryBtn_Org.click();
+			wait(nextBtn);
+			js.executeScript("arguments[0].click();", nextBtn);
+			wait(applicantDetailsH);
+			System.out.println("Applicant Details Form is displayed");
+			wait(nextBtn);
+			js.executeScript("arguments[0].click();", nextBtn);
+			wait(representativeH);
+			System.out.println("Representative Details Form is displayed");
+			wait(nextBtn);
+			js.executeScript("arguments[0].click();", nextBtn);
+		}
+	}
+	
+	public void applicationForm(String serviceCategory, String large, String small, String artisanal, String radioactive, String nonradioactive) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait(serviceAppFormH);
+
+		wait(spin_1);
+		spin_1.click();
+		
+		if (large != null) {
+		wait(selectLarge);// open list
+		selectLarge.click();
+		} else if (small != null)
+		{
+			wait(selectSmall);// open list
+			selectSmall.click();
+		} else {
+			wait(selectArtisanal);// open list
+		selectArtisanal.click();
+		}
+		
+
+		wait(mineralsType);
+		
+		if (radioactive != null) {
+		mineralsType.sendKeys("Radioactive");
+		wait(selectRadioactive);
+		selectRadioactive.click();}
+		
+		else if (nonradioactive != null) {
+				mineralsType.sendKeys("Non-Radioactive");
+				wait(selectNon_radioactive);
+				selectNon_radioactive.click();}
+				else {
+					mineralsType.sendKeys("Radioactive and Non-Radioactive");
+					wait(selectNon_and_Radioactive);
+					selectNon_and_Radioactive.click();
+				}
+
+		// fill in minerals table
+		wait(mineralsH_0);
+		wait(addMineralsBtn);
+		// addMineralsBtn.click();
+		js.executeScript("arguments[0].click();", addMineralsBtn);
+		wait(mineralsH);
+		wait(mineral);
+		wait(openListBtn);
+		openListBtn.click();
+		wait(selectMineral);
+		selectMineral.click();
+		wait(saveMineralsBtn);
+		saveMineralsBtn.click();
+
+		// Details Of Area Applied For Section
+		wait(province);
+		province.sendKeys("EASTERN PROVINCE");
+		wait(district);
+		district.sendKeys("KATETE");
+		wait(size);
+		size.sendKeys("100.23");
+
+		// fill in coordinates table
+		wait(addCoordinatesBtn);
+		wait(addCoordinatesBtn);
+		js.executeScript("arguments[0].click();", addCoordinatesBtn);
+		wait(coordinatesH);
+		wait(c1);
+		c1.sendKeys("1");
+		wait(c2);
+		c2.sendKeys("1");
+		wait(c3);
+		c3.sendKeys("1");
+		wait(c4);
+		c4.sendKeys("1");
+		wait(c5);
+		c5.sendKeys("1");
+		wait(c6);
+		c6.sendKeys("1");
+		wait(saveCoordinatesBtn);
+		js.executeScript("arguments[0].click();", saveCoordinatesBtn);
+
+		// Additional details Section
+		wait(tpin);
+		tpin.sendKeys("1234567895");
+		wait(land);
+		land.sendKeys("Land/200");
+
+		if (serviceCategory == "Mining Licence") {
+			wait(envImpactNo);
+			envImpactNo.sendKeys("134324");
+		}
+
+		wait(nextBtn);
+		js.executeScript("arguments[0].click();", nextBtn);
+
 	}
 
 	// Service Application Form
@@ -280,9 +370,6 @@ public class Application_Forms extends AbstractComponents {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
 		wait(serviceAppFormH);
-		if (serviceAppFormH.isDisplayed()) {
-			System.out.println("Service Application Form is displayed");
-		}
 
 		wait(spin_1);
 		spin_1.click();
